@@ -8,6 +8,11 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
+    var padding = MediaQuery.of(context).padding;
+    double safeWidth = MediaQuery.of(context).size.width - 40;
+    double safeHeight =
+        MediaQuery.of(context).size.height - padding.top - padding.bottom - 40;
+
     return Scaffold(
       backgroundColor: Color(0xff474562),
       body: Container(
@@ -16,96 +21,153 @@ class _MainScreenState extends State<MainScreen> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Full\nmoon\nnight\n12345789'),
-                    FloatingActionButton(onPressed: null)
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                // Weather Description
                 Container(
-                  width: 400,
-                  height: 400,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('images/sun.png'),
-                      fit: BoxFit.cover,
+                  height: safeHeight * 0.2,
+                  width: safeWidth,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: double.infinity,
+                        width: safeWidth * 0.30,
+                        child: FittedBox(
+                          child: Text(
+                            'Full\nmoon\nnight',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Weather Icon
+                Container(
+                  height: safeHeight * .55,
+                  width: safeWidth,
+                  child: FittedBox(
+                    child: Image.asset('images/sun.png'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                // CityName, CountryName
+                Container(
+                  // TODO: Find a way to align text left.
+                  height: safeHeight * 0.05,
+                  width: safeWidth * 0.5,
+                  child: FittedBox(
+                    child: Text(
+                      'Moscow, Russia',
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Full moon night 123456789',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
+                // Bottom Bar Info
+                Container(
+                  height: safeHeight * 0.2,
+                  width: safeWidth,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Temperature (w/ feels like temperature)
+                      Container(
+                        height: double.infinity,
+                        width: safeWidth * 0.4,
+                        child: Column(
+                          children: [
+                            Container(
+                              height: safeHeight * 0.2 * 0.75,
+                              width: double.infinity,
+                              child: FittedBox(
+                                child: Text(
+                                  '79*',
+                                  style: TextStyle(
+                                    fontSize: 40,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: safeHeight * 0.2 * 0.25,
+                              width: safeWidth * 0.4 * .75,
+                              child: FittedBox(
+                                child: Text(
+                                  'feels like 32*',
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          '79*',
-                          style: TextStyle(
-                            fontSize: 40,
-                          ),
-                        ),
-                        Text('feels like 32*'),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Column(
+                      // 3 Upcoming  Temperatures
+                      Container(
+                        height: double.infinity,
+                        width: safeWidth * 0.6,
+                        child: Row(
                           children: [
-                            Text('14:00'),
                             Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('images/cloud.png'),
-                                  fit: BoxFit.cover,
-                                ),
+                              height: double.infinity,
+                              width: safeWidth * 0.6 * 0.33,
+                              child: Column(
+                                children: [
+                                  Text('14:00'),
+                                  Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage('images/cloud.png'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Text('74*'),
+                                ],
                               ),
                             ),
-                            Text('74*'),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          children: [
-                            Text('18:00'),
                             Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('images/cloud.png'),
-                                  fit: BoxFit.cover,
-                                ),
+                              height: double.infinity,
+                              width: safeWidth * 0.6 * 0.33,
+                              child: Column(
+                                children: [
+                                  Text('18:00'),
+                                  Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage('images/cloud.png'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Text('70*'),
+                                ],
                               ),
                             ),
-                            Text('70*'),
+                            Container(
+                              height: double.infinity,
+                              width: safeWidth * 0.6 * 0.33,
+                              child: Column(
+                                children: [
+                                  Text('18:00'),
+                                  Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage('images/cloud.png'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Text('70*'),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
