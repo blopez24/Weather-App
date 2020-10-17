@@ -23,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 // Weather Description
                 Container(
-                  height: safeHeight * 0.2,
+                  height: safeHeight * 0.15,
                   width: safeWidth,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
                         width: safeWidth * 0.30,
                         child: FittedBox(
                           child: Text(
-                            'Full\nmoon\nnight',
+                            'Full Moon\nNight',
                           ),
                         ),
                       ),
@@ -42,11 +42,11 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 // Weather Icon
                 Container(
-                  height: safeHeight * .55,
+                  height: safeHeight * .60,
                   width: safeWidth,
                   child: FittedBox(
                     child: Image.asset('images/sun.png'),
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 // CityName, CountryName
@@ -78,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
                               width: double.infinity,
                               child: FittedBox(
                                 child: Text(
-                                  '79*',
+                                  '79°',
                                   style: TextStyle(
                                     fontSize: 40,
                                   ),
@@ -86,11 +86,12 @@ class _MainScreenState extends State<MainScreen> {
                               ),
                             ),
                             Container(
+                              // TODO: Align text left.
                               height: safeHeight * 0.2 * 0.25,
                               width: safeWidth * 0.4 * .75,
                               child: FittedBox(
                                 child: Text(
-                                  'feels like 32*',
+                                  'feels like 32°',
                                 ),
                               ),
                             ),
@@ -103,65 +104,26 @@ class _MainScreenState extends State<MainScreen> {
                         width: safeWidth * 0.6,
                         child: Row(
                           children: [
-                            Container(
-                              height: double.infinity,
-                              width: safeWidth * 0.6 * 0.33,
-                              child: Column(
-                                children: [
-                                  Text('14:00'),
-                                  Container(
-                                    width: 30,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('images/cloud.png'),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  Text('74*'),
-                                ],
-                              ),
+                            // +3 Hour
+                            UpcomingPrediction(
+                              safeWidth: safeWidth,
+                              safeHeight: safeHeight,
+                              time: '06:00',
+                              temperature: '76°',
                             ),
-                            Container(
-                              height: double.infinity,
-                              width: safeWidth * 0.6 * 0.33,
-                              child: Column(
-                                children: [
-                                  Text('18:00'),
-                                  Container(
-                                    width: 30,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('images/cloud.png'),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  Text('70*'),
-                                ],
-                              ),
+                            // +6 Hour
+                            UpcomingPrediction(
+                              safeWidth: safeWidth,
+                              safeHeight: safeHeight,
+                              time: '09:00',
+                              temperature: '70°',
                             ),
-                            Container(
-                              height: double.infinity,
-                              width: safeWidth * 0.6 * 0.33,
-                              child: Column(
-                                children: [
-                                  Text('18:00'),
-                                  Container(
-                                    width: 30,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('images/cloud.png'),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  Text('70*'),
-                                ],
-                              ),
+                            // +9 Hour
+                            UpcomingPrediction(
+                              safeWidth: safeWidth,
+                              safeHeight: safeHeight,
+                              time: '12:00',
+                              temperature: '64°',
                             ),
                           ],
                         ),
@@ -173,6 +135,75 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class UpcomingPrediction extends StatelessWidget {
+  const UpcomingPrediction({
+    Key key,
+    @required this.safeWidth,
+    @required this.safeHeight,
+    @required this.time,
+    @required this.temperature,
+  }) : super(key: key);
+
+  final double safeWidth;
+  final double safeHeight;
+  final String time;
+  // TODO: ICON
+  final String temperature;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      width: safeWidth * 0.6 * 0.33,
+      child: Column(
+        children: [
+          // SizeBox Equivalent
+          Container(
+            height: safeHeight * 0.2 * 0.1,
+            width: double.infinity,
+          ),
+          // 3 Hour Prediction
+          Container(
+            height: safeHeight * 0.2 * 0.266,
+            width: double.infinity,
+            child: FittedBox(
+              child: Text(
+                time,
+              ),
+            ),
+          ),
+          // Icon
+          Container(
+            height: safeHeight * 0.2 * 0.266,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/cloud.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          // Temperature
+          Container(
+            height: safeHeight * 0.2 * 0.266,
+            width: double.infinity,
+            child: FittedBox(
+              child: Text(
+                temperature,
+              ),
+            ),
+          ),
+          // SizeBox Equivalent
+          Container(
+            height: safeHeight * 0.2 * 0.1,
+            width: double.infinity,
+          ),
+        ],
       ),
     );
   }
