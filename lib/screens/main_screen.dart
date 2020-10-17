@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:weather_app/components/weather_description.dart';
+import 'package:weather_app/components/weather_icon_card.dart';
+import 'package:weather_app/components/temperature_card.dart';
+import 'package:weather_app/components/predictions_card.dart';
+
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -9,16 +14,17 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     var padding = MediaQuery.of(context).padding;
-    double safeWidth = MediaQuery.of(context).size.width - 40;
+    double safeWidth = MediaQuery.of(context).size.width - 20;
     double safeHeight =
-        MediaQuery.of(context).size.height - padding.top - padding.bottom - 40;
+        MediaQuery.of(context).size.height - padding.top - padding.bottom - 20;
 
     return Scaffold(
-      backgroundColor: Color(0xff474562),
+      // backgroundColor: Color(0xff474562),
+      backgroundColor: Colors.black,
       body: Container(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
                 // Weather Description
@@ -28,14 +34,9 @@ class _MainScreenState extends State<MainScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        height: double.infinity,
-                        width: safeWidth * 0.30,
-                        child: FittedBox(
-                          child: Text(
-                            'Full Moon\nNight',
-                          ),
-                        ),
+                      WeatherDescription(
+                        safeWidth: safeWidth,
+                        description: 'Full Moon\nNight',
                       ),
                     ],
                   ),
@@ -44,19 +45,22 @@ class _MainScreenState extends State<MainScreen> {
                 Container(
                   height: safeHeight * .60,
                   width: safeWidth,
-                  child: FittedBox(
-                    child: Image.asset('images/sun.png'),
-                    fit: BoxFit.cover,
-                  ),
+                  child: WeatherIcon(),
                 ),
                 // CityName, CountryName
                 Container(
-                  // TODO: Find a way to align text left.
                   height: safeHeight * 0.05,
-                  width: safeWidth * 0.5,
-                  child: FittedBox(
-                    child: Text(
-                      'Moscow, Russia',
+                  width: safeWidth,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: FittedBox(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Moscow, Russia',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -68,35 +72,11 @@ class _MainScreenState extends State<MainScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // Temperature (w/ feels like temperature)
-                      Container(
-                        height: double.infinity,
-                        width: safeWidth * 0.4,
-                        child: Column(
-                          children: [
-                            Container(
-                              height: safeHeight * 0.2 * 0.75,
-                              width: double.infinity,
-                              child: FittedBox(
-                                child: Text(
-                                  '79°',
-                                  style: TextStyle(
-                                    fontSize: 40,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              // TODO: Align text left.
-                              height: safeHeight * 0.2 * 0.25,
-                              width: safeWidth * 0.4 * .75,
-                              child: FittedBox(
-                                child: Text(
-                                  'feels like 32°',
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      TemperatureInfo(
+                        safeWidth: safeWidth,
+                        safeHeight: safeHeight,
+                        temperature: '79°',
+                        feelsTemperature: 'feels like 77°',
                       ),
                       // 3 Upcoming  Temperatures
                       Container(
@@ -135,75 +115,6 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class UpcomingPrediction extends StatelessWidget {
-  const UpcomingPrediction({
-    Key key,
-    @required this.safeWidth,
-    @required this.safeHeight,
-    @required this.time,
-    @required this.temperature,
-  }) : super(key: key);
-
-  final double safeWidth;
-  final double safeHeight;
-  final String time;
-  // TODO: ICON
-  final String temperature;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: safeWidth * 0.6 * 0.33,
-      child: Column(
-        children: [
-          // SizeBox Equivalent
-          Container(
-            height: safeHeight * 0.2 * 0.1,
-            width: double.infinity,
-          ),
-          // 3 Hour Prediction
-          Container(
-            height: safeHeight * 0.2 * 0.266,
-            width: double.infinity,
-            child: FittedBox(
-              child: Text(
-                time,
-              ),
-            ),
-          ),
-          // Icon
-          Container(
-            height: safeHeight * 0.2 * 0.266,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('images/cloud.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          // Temperature
-          Container(
-            height: safeHeight * 0.2 * 0.266,
-            width: double.infinity,
-            child: FittedBox(
-              child: Text(
-                temperature,
-              ),
-            ),
-          ),
-          // SizeBox Equivalent
-          Container(
-            height: safeHeight * 0.2 * 0.1,
-            width: double.infinity,
-          ),
-        ],
       ),
     );
   }
