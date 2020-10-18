@@ -6,17 +6,38 @@ import 'package:weather_app/components/temperature_card.dart';
 import 'package:weather_app/components/predictions_card.dart';
 
 class MainScreen extends StatefulWidget {
+  final weatherInfo;
+  MainScreen({this.weatherInfo});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
+  int temperature;
+  int condition;
+  String cityName;
+
+  @override
+  void initState() {
+    super.initState();
+    updateUI(widget.weatherInfo);
+  }
+
+  void updateUI(dynamic weatherData) {
+    temperature = weatherData['main']['temp'].toInt();
+    condition = weatherData['weather'][0]['id'];
+    cityName = weatherData['name'];
+
+    print(weatherData);
+    print(temperature);
+  }
+
   @override
   Widget build(BuildContext context) {
     var padding = MediaQuery.of(context).padding;
     double safeWidth = MediaQuery.of(context).size.width - 20;
-    double safeHeight =
-        MediaQuery.of(context).size.height - padding.top - padding.bottom - 20;
+    double safeHeight = MediaQuery.of(context).size.height - padding.top - padding.bottom - 20;
 
     return Scaffold(
       // backgroundColor: Color(0xff474562),
@@ -56,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
                     child: FittedBox(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Moscow, Russia',
+                        '$cityName',
                         style: TextStyle(
                           color: Colors.white,
                         ),
@@ -75,7 +96,7 @@ class _MainScreenState extends State<MainScreen> {
                       TemperatureInfo(
                         safeWidth: safeWidth,
                         safeHeight: safeHeight,
-                        temperature: '79°',
+                        temperature: '$temperature°',
                         feelsTemperature: 'feels like 77°',
                       ),
                       // 3 Upcoming  Temperatures
@@ -89,6 +110,7 @@ class _MainScreenState extends State<MainScreen> {
                               safeWidth: safeWidth,
                               safeHeight: safeHeight,
                               time: '06:00',
+                              // TODO: Weather Icon
                               temperature: '76°',
                             ),
                             // +6 Hour

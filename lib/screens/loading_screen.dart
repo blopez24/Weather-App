@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:weather_app/services/location.dart';
 import 'package:weather_app/services/networking.dart';
 import 'package:weather_app/services/key.dart';
+
+import 'package:weather_app/screens/main_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -31,22 +34,28 @@ class _LoadingScreenState extends State<LoadingScreen> {
     longitude = location.longitude;
 
     NetworkHelper networkHelper = new NetworkHelper(
-        "http://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey");
+        "http://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=imperial");
 
     var weatherData = await networkHelper.getData();
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return MainScreen(
+        weatherInfo: weatherData,
+      );
+    }));
   }
 
   @override
   Widget build(BuildContext context) {
     getLocation();
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: SpinKitWave(
+          color: Colors.white,
+          size: 100.0,
+        ),
+      ),
+    );
   }
 }
-
-// double temperature = decodedData['main']['temp'];
-// int condition = decodedData['weather'][0]['id'];
-// String cityName = decodedData['name'];
-//
-// print(temperature);
-// print(condition);
-// print(cityName);
