@@ -43,13 +43,13 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 // Weather Icon
                 Container(
-                  height: safeHeight * .60,
+                  height: safeHeight * .575,
                   width: safeWidth,
                   child: WeatherIcon(),
                 ),
                 // CityName, CountryName
                 Container(
-                  height: safeHeight * 0.05,
+                  height: safeHeight * 0.075,
                   width: safeWidth,
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
