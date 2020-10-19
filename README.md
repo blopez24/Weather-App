@@ -1,4 +1,4 @@
 # Simple Weather
 
-A Flutter that display weather information in a minimalistic manner.
+A Flutter App that display weather information in a minimalistic manner.
 
