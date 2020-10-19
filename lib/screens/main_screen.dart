@@ -14,9 +14,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int temperature;
-  int condition;
+  String description;
+  int iconID;
   String cityName;
+  int temperature;
+  int feelsTemperature;
 
   @override
   void initState() {
@@ -25,12 +27,13 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void updateUI(dynamic weatherData) {
-    temperature = weatherData['main']['temp'].toInt();
-    condition = weatherData['weather'][0]['id'];
+    description = weatherData['weather'][0]['description'];
+    iconID = weatherData['weather'][0]['id'];
     cityName = weatherData['name'];
+    temperature = weatherData['main']['temp'].toInt();
+    feelsTemperature = weatherData['main']['feels_like'].toInt();
 
-    print(weatherData);
-    print(temperature);
+    print('$description\n$iconID\n$cityName\n$temperature\n$feelsTemperature');
   }
 
   @override
@@ -57,7 +60,7 @@ class _MainScreenState extends State<MainScreen> {
                     children: [
                       WeatherDescription(
                         safeWidth: safeWidth,
-                        description: 'Full Moon\nNight',
+                        description: description,
                       ),
                     ],
                   ),
@@ -97,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
                         safeWidth: safeWidth,
                         safeHeight: safeHeight,
                         temperature: '$temperature°',
-                        feelsTemperature: 'feels like 77°',
+                        feelsTemperature: 'feels like $feelsTemperature°',
                       ),
                       // 3 Upcoming  Temperatures
                       Container(

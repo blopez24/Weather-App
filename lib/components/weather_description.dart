@@ -1,6 +1,31 @@
 import 'package:flutter/material.dart';
 
 class WeatherDescription extends StatelessWidget {
+  String descriptionFormat(String description) {
+    var words = description.split(' ');
+    String format = '';
+
+    if (words.length == 1) {
+      format += words[0].toUpperCase() + words[0].substring(1);
+    } else if (words.length == 2) {
+      format += words[0][0].toUpperCase() +
+          words[0].substring(1) +
+          '\n' +
+          words[1][0].toUpperCase() +
+          words[1].substring(1);
+    } else {
+      for (int i = 0; i < words.length; i++) {
+        if (i == 1) {
+          format += words[i][0].toUpperCase() + words[i].substring(1) + '\n';
+        } else {
+          format += words[i][0].toUpperCase() + words[i].substring(1) + ' ';
+        }
+      }
+    }
+
+    return format;
+  }
+
   const WeatherDescription({
     Key key,
     @required this.safeWidth,
@@ -18,8 +43,9 @@ class WeatherDescription extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: FittedBox(
+          alignment: Alignment.centerLeft,
           child: Text(
-            description,
+            descriptionFormat(description),
             style: TextStyle(
               color: Colors.white,
             ),
