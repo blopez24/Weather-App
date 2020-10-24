@@ -32,7 +32,6 @@ class TemperatureInfo extends StatelessWidget {
                 child: Text(
                   temperature,
                   style: TextStyle(
-                    fontSize: 40,
                     color: Colors.white,
                   ),
                 ),
@@ -41,10 +40,11 @@ class TemperatureInfo extends StatelessWidget {
           ),
           Container(
             height: safeHeight * 0.2 * 0.25,
-            width: safeWidth * 0.4 * .75,
+            width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: FittedBox(
+                alignment: Alignment.centerLeft,
                 child: Text(
                   feelsTemperature,
                   style: TextStyle(

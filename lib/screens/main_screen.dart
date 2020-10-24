@@ -19,6 +19,12 @@ class _MainScreenState extends State<MainScreen> {
   String cityName;
   int temperature;
   int feelsTemperature;
+  int minTemperature;
+  int maxTemperature;
+  int sunriseUTC;
+  int sunsetUTC;
+
+  List<DateTime> times;
 
   @override
   void initState() {
@@ -33,7 +39,19 @@ class _MainScreenState extends State<MainScreen> {
     temperature = weatherData['main']['temp'].toInt();
     feelsTemperature = weatherData['main']['feels_like'].toInt();
 
-    print('$description\n$iconID\n$cityName\n$temperature\n$feelsTemperature');
+    minTemperature = weatherData['main']['temp_min'].toInt();
+    maxTemperature = weatherData['main']['temp_max'].toInt();
+
+    sunriseUTC = weatherData['sys']['sunrise'];
+    sunsetUTC = weatherData['sys']['sunset'];
+
+    // print('$description\n$iconID\n$cityName\n$temperature\n$feelsTemperature');
+    // print('$minTemperature\n$maxTemperature\n$sunrise\n$sunset');
+    var sunrise = new DateTime.fromMillisecondsSinceEpoch(sunriseUTC * 1000);
+    var sunset = new DateTime.fromMillisecondsSinceEpoch(sunsetUTC * 1000);
+    print('$sunrise, $sunset');
+    // times.add(sunrise);
+    // times.add(sunset);
   }
 
   @override
@@ -69,7 +87,7 @@ class _MainScreenState extends State<MainScreen> {
                 Container(
                   height: safeHeight * .575,
                   width: safeWidth,
-                  child: WeatherIcon(),
+                  child: MainWeatherIcon(id: iconID, times: times),
                 ),
                 // CityName, CountryName
                 Container(

@@ -24,7 +24,7 @@ class UpcomingPrediction extends StatelessWidget {
         children: [
           // SizeBox Equivalent
           Container(
-            height: safeHeight * 0.2 * 0.15,
+            height: safeHeight * 0.2 * 0.05,
             width: double.infinity,
           ),
           // 3 Hour Prediction
@@ -45,12 +45,12 @@ class UpcomingPrediction extends StatelessWidget {
           ),
           // Icon
           Container(
-            height: safeHeight * 0.2 * 0.266,
+            height: safeHeight * 0.2 * 0.366,
             width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: FittedBox(
-                child: Image.asset('images/cloud.png'),
+                child: Image.asset('images/moon.png'),
                 fit: BoxFit.cover,
               ),
             ),
