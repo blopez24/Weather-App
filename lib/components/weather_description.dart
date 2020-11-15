@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class WeatherDescription extends StatelessWidget {
+  /// Formats the weather [description] into 1 or 2 lines, depending on the word count.
   String descriptionFormat(String description) {
     var words = description.split(' ');
     String format = '';
 
     if (words.length == 1) {
-      format += words[0].toUpperCase() + words[0].substring(1);
+      format += words[0][0].toUpperCase() + words[0].substring(1);
     } else if (words.length == 2) {
       format += words[0][0].toUpperCase() +
           words[0].substring(1) +
@@ -39,7 +40,7 @@ class WeatherDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: double.infinity,
-      width: safeWidth * 0.40,
+      width: safeWidth * 0.9,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: FittedBox(
@@ -48,6 +49,8 @@ class WeatherDescription extends StatelessWidget {
             descriptionFormat(description),
             style: TextStyle(
               color: Colors.white,
+              height: 1,
+              letterSpacing: 1.0,
             ),
           ),
         ),

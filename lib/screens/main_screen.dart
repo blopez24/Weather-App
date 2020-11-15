@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/services/weather.dart';
 
 import 'package:weather_app/components/weather_description.dart';
 import 'package:weather_app/components/weather_icon_card.dart';
@@ -14,16 +15,19 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  String description;
-  int iconID;
-  String cityName;
-  int temperature;
-  int feelsTemperature;
-  int minTemperature;
-  int maxTemperature;
-  int sunriseUTC;
-  int sunsetUTC;
+  /// The current weather description and city's name of the phone's location.
+  String description, cityName;
 
+  /// Current weather icon id.
+  int iconID;
+
+  /// The current temperature, feels like temperature, lowest temperature, and highest temperature.
+  int temperature, feelsTemperature, minTemperature, maxTemperature;
+
+  /// The universal time of sunrise and sunset.
+  int sunriseUTC, sunsetUTC;
+
+  /// Holds the sunrise and sunset times.
   List<DateTime> times;
 
   @override
@@ -32,26 +36,20 @@ class _MainScreenState extends State<MainScreen> {
     updateUI(widget.weatherInfo);
   }
 
+  /// Components are fed weather information parsed from the json data.
   void updateUI(dynamic weatherData) {
-    description = weatherData['weather'][0]['description'];
-    iconID = weatherData['weather'][0]['id'];
-    cityName = weatherData['name'];
-    temperature = weatherData['main']['temp'].toInt();
-    feelsTemperature = weatherData['main']['feels_like'].toInt();
+    var w = Weather(jsonWeatherData: weatherData);
 
-    minTemperature = weatherData['main']['temp_min'].toInt();
-    maxTemperature = weatherData['main']['temp_max'].toInt();
+    description = w.getDescription();
+    iconID = w.getWeatherIconID();
+    cityName = w.getCityName();
 
-    sunriseUTC = weatherData['sys']['sunrise'];
-    sunsetUTC = weatherData['sys']['sunset'];
+    temperature = w.getTemp();
+    feelsTemperature = w.getFeelsTemp();
+    minTemperature = w.getMinTemp();
+    maxTemperature = w.getMaxTemp();
 
-    // print('$description\n$iconID\n$cityName\n$temperature\n$feelsTemperature');
-    // print('$minTemperature\n$maxTemperature\n$sunrise\n$sunset');
-    var sunrise = new DateTime.fromMillisecondsSinceEpoch(sunriseUTC * 1000);
-    var sunset = new DateTime.fromMillisecondsSinceEpoch(sunsetUTC * 1000);
-    print('$sunrise, $sunset');
-    // times.add(sunrise);
-    // times.add(sunset);
+    times = w.getSunsetAndSunrise();
   }
 
   @override
@@ -61,7 +59,6 @@ class _MainScreenState extends State<MainScreen> {
     double safeHeight = MediaQuery.of(context).size.height - padding.top - padding.bottom - 20;
 
     return Scaffold(
-      // backgroundColor: Color(0xff474562),
       backgroundColor: Colors.black,
       body: Container(
         child: SafeArea(
@@ -69,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
-                // Weather Description
+                /// ROW 1: Weather Description
                 Container(
                   height: safeHeight * 0.15,
                   width: safeWidth,
@@ -83,13 +80,15 @@ class _MainScreenState extends State<MainScreen> {
                     ],
                   ),
                 ),
-                // Weather Icon
+
+                /// ROW 2: Weather Icon
                 Container(
                   height: safeHeight * .575,
                   width: safeWidth,
                   child: MainWeatherIcon(id: iconID, times: times),
                 ),
-                // CityName, CountryName
+
+                /// ROW 3: City's Name
                 Container(
                   height: safeHeight * 0.075,
                   width: safeWidth,
@@ -101,6 +100,8 @@ class _MainScreenState extends State<MainScreen> {
                         '$cityName',
                         style: TextStyle(
                           color: Colors.white,
+                          height: 1,
+                          letterSpacing: 1.0,
                         ),
                       ),
                     ),

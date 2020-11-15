@@ -13,8 +13,13 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  /// The latitude of the phone's location.
   double latitude;
+
+  /// The longitude of the phone's location.
   double longitude;
+
+  /// The API key to connect to openweatherapi.com
   String apiKey;
 
   @override
@@ -23,6 +28,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     getLocation();
   }
 
+  /// Fetches the location of the user and grabs the weather information.
   void getLocation() async {
     ApiKeyFetcher k = ApiKeyFetcher();
     apiKey = k.getApiKey();
@@ -32,12 +38,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     latitude = location.latitude;
     longitude = location.longitude;
+    print('$latitude $longitude');
 
     NetworkHelper networkHelper = new NetworkHelper(
         "http://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=imperial");
 
     var weatherData = await networkHelper.getData();
 
+    /// Moves to the main screen, passing along the weather data.
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return MainScreen(
         weatherInfo: weatherData,
@@ -45,6 +53,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     }));
   }
 
+  /// Displays a loading spin kit wave.
   @override
   Widget build(BuildContext context) {
     getLocation();
