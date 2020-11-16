@@ -4,7 +4,7 @@ import 'package:weather_app/services/weather.dart';
 import 'package:weather_app/components/weather_description.dart';
 import 'package:weather_app/components/weather_icon_card.dart';
 import 'package:weather_app/components/temperature_card.dart';
-import 'package:weather_app/components/predictions_card.dart';
+import 'package:weather_app/components/next_days.dart';
 
 class MainScreen extends StatefulWidget {
   final weatherInfo;
@@ -85,7 +85,10 @@ class _MainScreenState extends State<MainScreen> {
                 Container(
                   height: safeHeight * .575,
                   width: safeWidth,
-                  child: MainWeatherIcon(id: iconID, times: times),
+                  child: MainWeatherIcon(
+                    id: iconID,
+                    times: times,
+                  ),
                 ),
 
                 /// ROW 3: City's Name
@@ -122,36 +125,16 @@ class _MainScreenState extends State<MainScreen> {
                         feelsTemperature: feelsTemperature,
                       ),
 
-                      /// 3 Upcoming  Temperatures
-                      Container(
-                        height: double.infinity,
-                        width: safeWidth * 0.6,
-                        child: Row(
-                          children: [
-                            // +3 Hour
-                            UpcomingPrediction(
-                              safeWidth: safeWidth,
-                              safeHeight: safeHeight,
-                              time: '06:00',
-                              // TODO: Weather Icon
-                              temperature: '76°',
-                            ),
-                            // +6 Hour
-                            UpcomingPrediction(
-                              safeWidth: safeWidth,
-                              safeHeight: safeHeight,
-                              time: '09:00',
-                              temperature: '70°',
-                            ),
-                            // +9 Hour
-                            UpcomingPrediction(
-                              safeWidth: safeWidth,
-                              safeHeight: safeHeight,
-                              time: '12:00',
-                              temperature: '64°',
-                            ),
-                          ],
-                        ),
+                      /// Next 3 Days Weather
+                      NextDays(
+                        safeWidth: safeWidth,
+                        safeHeight: safeHeight,
+                        dayOneTemp: 01,
+                        dayOneIconID: -1,
+                        dayTwoTemp: 02,
+                        dayTwoIconID: -1,
+                        dayThreeTemp: 03,
+                        dayThreeIconID: -1,
                       ),
                     ],
                   ),

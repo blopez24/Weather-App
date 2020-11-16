@@ -20,7 +20,6 @@ class TemperatureInfo extends StatelessWidget {
       height: double.infinity,
       width: safeWidth * 0.4,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             height: safeHeight * 0.2 * 0.75,
@@ -28,7 +27,6 @@ class TemperatureInfo extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: FittedBox(
-                alignment: Alignment.centerLeft,
                 child: Text(
                   '$temperature°',
                   style: TextStyle(
@@ -37,6 +35,7 @@ class TemperatureInfo extends StatelessWidget {
                     letterSpacing: 1.0,
                   ),
                 ),
+                alignment: Alignment.topCenter,
               ),
             ),
           ),
@@ -46,7 +45,6 @@ class TemperatureInfo extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: FittedBox(
-                alignment: Alignment.centerLeft,
                 child: Text(
                   'feels like $feelsTemperature°',
                   style: TextStyle(
