@@ -16,12 +16,11 @@ class MainWeatherIcon extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: FittedBox(
-        // TODO: Figure out how to pass image info.
         child: IconCard(
           id: id,
           times: times,
         ),
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+/// Holds the icon id matching the weather icon.
 const iconDictionary = {
   200: [
     'thunderstorm_day',
@@ -36,6 +37,7 @@ const iconDictionary = {
 };
 
 class IconCard extends StatelessWidget {
+  /// Given a icon [number], it simplifies it to an available weather icon id.
   int iconDictHelper(int number) {
     if (number >= 200 && number <= 232) {
       return 200;
@@ -56,9 +58,23 @@ class IconCard extends StatelessWidget {
     }
   }
 
-  // TODO: IMPLEMENT LATER
-  int dayNightHelper(var sunrise, var sunset) {
-    return -1;
+  /// Given the sunrise and sunset times, return 0 if it is day time and 1 if it is night time.
+  int dayNightHelper() {
+    var sunrise = this.times[0];
+    var sunset = this.times[1];
+    var now = new DateTime.now();
+    if (now.isBefore(sunrise) && now.isAfter(sunset)) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  /// Returns the weather icon string.
+  String getImage() {
+    int icon = iconDictHelper(this.id);
+    int time = dayNightHelper();
+    return 'images/${iconDictionary[icon][time]}.svg';
   }
 
   const IconCard({
@@ -72,11 +88,10 @@ class IconCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String assetName = 'images/clouds_day.svg';
+    final String assetName = getImage();
     final Widget svg = SvgPicture.asset(
       assetName,
       color: Colors.white,
-      semanticsLabel: 'Broken Clouds',
     );
     return svg;
   }

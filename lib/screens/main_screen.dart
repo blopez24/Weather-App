@@ -71,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
                   height: safeHeight * 0.15,
                   width: safeWidth,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       WeatherDescription(
                         safeWidth: safeWidth,
@@ -107,21 +107,22 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   ),
                 ),
-                // Bottom Bar Info
+
+                /// ROW 4: Weather Temperature / Upcoming Weather
                 Container(
                   height: safeHeight * 0.2,
                   width: safeWidth,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Temperature (w/ feels like temperature)
+                      /// Temperature (w/ feels like temperature)
                       TemperatureInfo(
                         safeWidth: safeWidth,
                         safeHeight: safeHeight,
-                        temperature: '$temperature°',
-                        feelsTemperature: 'feels like $feelsTemperature°',
+                        temperature: temperature,
+                        feelsTemperature: feelsTemperature,
                       ),
-                      // 3 Upcoming  Temperatures
+
+                      /// 3 Upcoming  Temperatures
                       Container(
                         height: double.infinity,
                         width: safeWidth * 0.6,

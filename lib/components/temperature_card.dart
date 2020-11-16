@@ -11,8 +11,8 @@ class TemperatureInfo extends StatelessWidget {
 
   final double safeWidth;
   final double safeHeight;
-  final String temperature;
-  final String feelsTemperature;
+  final int temperature;
+  final int feelsTemperature;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,11 @@ class TemperatureInfo extends StatelessWidget {
               child: FittedBox(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  temperature,
+                  '$temperature°',
                   style: TextStyle(
                     color: Colors.white,
+                    height: 1,
+                    letterSpacing: 1.0,
                   ),
                 ),
               ),
@@ -46,9 +48,11 @@ class TemperatureInfo extends StatelessWidget {
               child: FittedBox(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  feelsTemperature,
+                  'feels like $feelsTemperature°',
                   style: TextStyle(
                     color: Colors.white,
+                    height: 1,
+                    letterSpacing: 1.0,
                   ),
                 ),
               ),
