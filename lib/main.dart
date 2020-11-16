@@ -7,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // App Loads to the loading screen.
+  /// App Loads to the loading screen.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

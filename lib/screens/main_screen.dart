@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/services/weather.dart';
 
 import 'package:weather_app/components/weather_description.dart';
-import 'package:weather_app/components/weather_icon_card.dart';
 import 'package:weather_app/components/temperature_card.dart';
 import 'package:weather_app/components/next_days.dart';
+import 'package:weather_app/components/svg_icon.dart';
 
 class MainScreen extends StatefulWidget {
   final weatherInfo;
@@ -71,7 +71,6 @@ class _MainScreenState extends State<MainScreen> {
                   height: safeHeight * 0.15,
                   width: safeWidth,
                   child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       WeatherDescription(
                         safeWidth: safeWidth,
@@ -85,7 +84,7 @@ class _MainScreenState extends State<MainScreen> {
                 Container(
                   height: safeHeight * .575,
                   width: safeWidth,
-                  child: MainWeatherIcon(
+                  child: SvgIcon(
                     id: iconID,
                     times: times,
                   ),
@@ -135,6 +134,7 @@ class _MainScreenState extends State<MainScreen> {
                         dayTwoIconID: -1,
                         dayThreeTemp: 03,
                         dayThreeIconID: -1,
+                        times: [],
                       ),
                     ],
                   ),

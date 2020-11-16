@@ -36,7 +36,7 @@ const iconDictionary = {
   ],
 };
 
-class IconCard extends StatelessWidget {
+class SvgIcon extends StatelessWidget {
   /// Given a icon [number], it simplifies it to an available weather icon id.
   int iconDictHelper(int number) {
     if (number >= 200 && number <= 232) {
@@ -60,6 +60,9 @@ class IconCard extends StatelessWidget {
 
   /// Given the sunrise and sunset times, return 0 if it is day time and 1 if it is night time.
   int dayNightHelper() {
+    if (this.times.isEmpty) {
+      return 0;
+    }
     var sunrise = this.times[0];
     var sunset = this.times[1];
     var now = new DateTime.now();
@@ -77,7 +80,7 @@ class IconCard extends StatelessWidget {
     return 'images/${iconDictionary[icon][time]}.svg';
   }
 
-  const IconCard({
+  const SvgIcon({
     Key key,
     @required this.id,
     @required this.times,
@@ -89,10 +92,15 @@ class IconCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String assetName = getImage();
-    final Widget svg = SvgPicture.asset(
-      assetName,
-      color: Colors.white,
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: FittedBox(
+        child: SvgPicture.asset(
+          assetName,
+          color: Colors.white,
+        ),
+        fit: BoxFit.contain,
+      ),
     );
-    return svg;
   }
 }

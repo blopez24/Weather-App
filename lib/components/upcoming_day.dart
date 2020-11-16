@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/components/svg_icon.dart';
 
 class UpcomingDay extends StatelessWidget {
   const UpcomingDay({
@@ -7,12 +8,13 @@ class UpcomingDay extends StatelessWidget {
     @required this.safeHeight,
     @required this.temperature,
     @required this.iconID,
+    @required this.times,
   }) : super(key: key);
 
-  final double safeWidth;
-  final double safeHeight;
+  final double safeWidth, safeHeight;
   final int iconID;
   final int temperature;
+  final List<DateTime> times;
 
   /// TODO: ICON
 
@@ -42,20 +44,16 @@ class UpcomingDay extends StatelessWidget {
             ),
           ),
 
-          /// Icon
+          /// Svg Icon
           Container(
-            height: safeHeight * 0.2 * 0.50,
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: FittedBox(
-                child: Image.asset('images/moon.png'),
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
+              height: safeHeight * 0.2 * 0.50,
+              width: double.infinity,
+              child: SvgIcon(
+                id: iconID,
+                times: times,
+              )),
 
-          /// 3 Hour Prediction
+          /// Date
           Container(
             height: safeHeight * 0.2 * 0.25,
             width: double.infinity,
