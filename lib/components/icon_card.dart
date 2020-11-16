@@ -63,7 +63,10 @@ class IconCard extends StatelessWidget {
     var sunrise = this.times[0];
     var sunset = this.times[1];
     var now = new DateTime.now();
-    if (now.isBefore(sunrise) && now.isAfter(sunset)) {
+    print(now);
+    print(sunrise);
+    print(sunset);
+    if (now.isBefore(sunrise) || now.isAfter(sunset)) {
       return 1;
     } else {
       return 0;
@@ -74,6 +77,7 @@ class IconCard extends StatelessWidget {
   String getImage() {
     int icon = iconDictHelper(this.id);
     int time = dayNightHelper();
+    print('$icon $time');
     return 'images/${iconDictionary[icon][time]}.svg';
   }
 
