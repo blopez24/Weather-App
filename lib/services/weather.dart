@@ -3,33 +3,19 @@ class Weather {
   final jsonWeatherData;
   Weather({this.jsonWeatherData});
 
-  String getDescription() {
-    return this.jsonWeatherData['weather'][0]['description'];
-  }
+  getDescription() => this.jsonWeatherData['weather'][0]['description'];
 
-  String getCityName() {
-    return this.jsonWeatherData['name'];
-  }
+  getCityName() => this.jsonWeatherData['name'];
 
-  int getWeatherIconID() {
-    return this.jsonWeatherData['weather'][0]['id'];
-  }
+  getWeatherIconID() => this.jsonWeatherData['weather'][0]['id'];
 
-  int getTemp() {
-    return this.jsonWeatherData['main']['temp'].toInt();
-  }
+  getTemp() => this.jsonWeatherData['main']['temp'].toInt();
 
-  int getFeelsTemp() {
-    return this.jsonWeatherData['main']['feels_like'].toInt();
-  }
+  getFeelsTemp() => this.jsonWeatherData['main']['feels_like'].toInt();
 
-  int getMinTemp() {
-    return this.jsonWeatherData['main']['temp_min'].toInt();
-  }
+  getMinTemp() => this.jsonWeatherData['main']['temp_min'].toInt();
 
-  int getMaxTemp() {
-    return this.jsonWeatherData['main']['temp_max'].toInt();
-  }
+  getMaxTemp() => this.jsonWeatherData['main']['temp_max'].toInt();
 
   List<DateTime> getSunsetAndSunrise() {
     var sunriseUTC = jsonWeatherData['sys']['sunrise'];

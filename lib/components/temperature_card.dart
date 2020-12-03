@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/constants.dart';
 
 class TemperatureInfo extends StatelessWidget {
   const TemperatureInfo({
@@ -29,11 +30,7 @@ class TemperatureInfo extends StatelessWidget {
               child: FittedBox(
                 child: Text(
                   '$temperature°',
-                  style: TextStyle(
-                    color: Colors.white,
-                    height: 1,
-                    letterSpacing: 1.0,
-                  ),
+                  style: kMainTextStyle,
                 ),
                 alignment: Alignment.topCenter,
               ),
@@ -47,11 +44,7 @@ class TemperatureInfo extends StatelessWidget {
               child: FittedBox(
                 child: Text(
                   'feels like $feelsTemperature°',
-                  style: TextStyle(
-                    color: Colors.white,
-                    height: 1,
-                    letterSpacing: 1.0,
-                  ),
+                  style: kMainTextStyle,
                 ),
               ),
             ),

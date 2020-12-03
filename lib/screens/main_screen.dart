@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/constants.dart';
 import 'package:weather_app/services/weather.dart';
 
 import 'package:weather_app/components/weather_description.dart';
@@ -100,11 +101,7 @@ class _MainScreenState extends State<MainScreen> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         '$cityName',
-                        style: TextStyle(
-                          color: Colors.white,
-                          height: 1,
-                          letterSpacing: 1.0,
-                        ),
+                        style: kMainTextStyle,
                       ),
                     ),
                   ),

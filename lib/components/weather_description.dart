@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/constants.dart';
 
 class WeatherDescription extends StatelessWidget {
   /// Formats the weather [description] into 1 or 2 lines, depending on the word count.
@@ -47,11 +48,7 @@ class WeatherDescription extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             descriptionFormat(description),
-            style: TextStyle(
-              color: Colors.white,
-              height: 1,
-              letterSpacing: 1.0,
-            ),
+            style: kMainTextStyle,
           ),
         ),
       ),

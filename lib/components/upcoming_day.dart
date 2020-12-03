@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/components/svg_icon.dart';
+import 'package:weather_app/constants.dart';
 
 class UpcomingDay extends StatelessWidget {
   const UpcomingDay({
@@ -15,8 +16,6 @@ class UpcomingDay extends StatelessWidget {
   final int iconID;
   final int temperature;
   final List<DateTime> times;
-
-  /// TODO: ICON
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +33,7 @@ class UpcomingDay extends StatelessWidget {
               child: FittedBox(
                 child: Text(
                   '$temperature°',
-                  style: TextStyle(
-                    color: Colors.white,
-                    height: 1.5,
-                    letterSpacing: 1.0,
-                  ),
+                  style: kMainTextStyle,
                 ),
               ),
             ),
@@ -62,11 +57,7 @@ class UpcomingDay extends StatelessWidget {
               child: FittedBox(
                 child: Text(
                   '00/01',
-                  style: TextStyle(
-                    color: Colors.white,
-                    height: 1.5,
-                    letterSpacing: 1.0,
-                  ),
+                  style: kMainTextStyle,
                 ),
               ),
             ),
