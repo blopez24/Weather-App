@@ -129,6 +129,8 @@ class _MainScreenState extends State<MainScreen> {
                         safeHeight: safeHeight,
                         temperature: temperature,
                         feelsTemperature: feelsTemperature,
+                        minTemperature: minTemperature,
+                        maxTemperature: maxTemperature,
                       ),
 
                       /// Next 3 Days Weather

@@ -8,12 +8,13 @@ class TemperatureInfo extends StatelessWidget {
     @required this.safeHeight,
     @required this.temperature,
     @required this.feelsTemperature,
+    @required this.minTemperature,
+    @required this.maxTemperature,
   }) : super(key: key);
 
   final double safeWidth;
   final double safeHeight;
-  final int temperature;
-  final int feelsTemperature;
+  final int temperature, feelsTemperature, minTemperature, maxTemperature;
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +24,13 @@ class TemperatureInfo extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: safeHeight * 0.2 * 0.75,
+            height: safeHeight * 0.2 * 0.60,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(2.0),
               child: FittedBox(
                 child: Text(
-                  '$temperature°',
+                  ' $temperature°',
                   style: kMainTextStyle,
                 ),
                 alignment: Alignment.topCenter,
@@ -37,10 +38,24 @@ class TemperatureInfo extends StatelessWidget {
             ),
           ),
           Container(
-            height: safeHeight * 0.2 * 0.25,
+            height: safeHeight * 0.2 * 0.20,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(2.0),
+              child: FittedBox(
+                child: Text(
+                  '$maxTemperature° | $minTemperature°',
+                  style: kMainTextStyle,
+                ),
+                alignment: Alignment.center,
+              ),
+            ),
+          ),
+          Container(
+            height: safeHeight * 0.2 * 0.20,
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
               child: FittedBox(
                 child: Text(
                   'feels like $feelsTemperature°',

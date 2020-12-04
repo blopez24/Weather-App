@@ -43,7 +43,7 @@ class WeatherDescription extends StatelessWidget {
       height: double.infinity,
       width: safeWidth * 0.9,
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(2.0),
         child: FittedBox(
           alignment: Alignment.centerLeft,
           child: Text(

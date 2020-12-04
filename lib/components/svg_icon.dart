@@ -93,7 +93,7 @@ class SvgIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final String assetName = getImage();
     return Padding(
-      padding: const EdgeInsets.all(5.0),
+      padding: const EdgeInsets.all(2.0),
       child: FittedBox(
         child: SvgPicture.asset(
           assetName,
