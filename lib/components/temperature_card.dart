@@ -4,16 +4,15 @@ import 'package:weather_app/constants.dart';
 class TemperatureInfo extends StatelessWidget {
   const TemperatureInfo({
     Key key,
-    @required this.safeWidth,
     @required this.safeHeight,
+    @required this.safeWidth,
     @required this.temperature,
     @required this.feelsTemperature,
     @required this.minTemperature,
     @required this.maxTemperature,
   }) : super(key: key);
 
-  final double safeWidth;
-  final double safeHeight;
+  final double safeHeight, safeWidth;
   final int temperature, feelsTemperature, minTemperature, maxTemperature;
 
   @override
@@ -33,7 +32,7 @@ class TemperatureInfo extends StatelessWidget {
                   ' $temperature°',
                   style: kMainTextStyle,
                 ),
-                alignment: Alignment.topCenter,
+                alignment: Alignment.center,
               ),
             ),
           ),

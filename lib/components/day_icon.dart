@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/components/svg_icon.dart';
 import 'package:weather_app/constants.dart';
 
-class UpcomingDay extends StatelessWidget {
-  const UpcomingDay({
+class DayIcon extends StatelessWidget {
+  const DayIcon({
     Key key,
     @required this.safeWidth,
     @required this.safeHeight,

@@ -11,3 +11,9 @@ const kMainTextStyle = TextStyle(
   height: 1.0,
   letterSpacing: 1.0,
 );
+
+const kGreyTextStyle = TextStyle(
+  color: Colors.grey,
+  height: 1.0,
+  letterSpacing: 1.0,
+);

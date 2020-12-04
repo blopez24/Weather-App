@@ -4,7 +4,7 @@ import 'package:weather_app/services/weather.dart';
 
 import 'package:weather_app/components/weather_description.dart';
 import 'package:weather_app/components/temperature_card.dart';
-import 'package:weather_app/components/next_days.dart';
+import 'package:weather_app/components/day_icons.dart';
 import 'package:weather_app/components/svg_icon.dart';
 
 class MainScreen extends StatefulWidget {
@@ -93,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
 
                 /// ROW 2: Weather Icon
                 Container(
-                  height: safeHeight * .575,
+                  height: safeHeight * 0.35,
                   width: safeWidth,
                   child: SvgIcon(
                     id: iconID,
@@ -101,7 +101,20 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
 
-                /// ROW 3: City's Name
+                /// ROW 3: Hourly Weather
+                Container(
+                  height: safeHeight * 0.225,
+                  width: safeWidth,
+                  color: Colors.greenAccent,
+
+                  /// TODO: Look into graphs, this currently looks to ugly.
+                  // child: HourIcons(
+                  //   safeHeight: safeHeight,
+                  //   safeWidth: safeWidth,
+                  // ),
+                ),
+
+                /// ROW 4: City's Name
                 Container(
                   height: safeHeight * 0.075,
                   width: safeWidth,
@@ -117,16 +130,16 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
 
-                /// ROW 4: Weather Temperature / Upcoming Weather
+                /// ROW 5: Current Weather / Daily Weather
                 Container(
-                  height: safeHeight * 0.2,
+                  height: safeHeight * 0.20,
                   width: safeWidth,
                   child: Row(
                     children: [
                       /// Temperature (w/ feels like temperature)
                       TemperatureInfo(
-                        safeWidth: safeWidth,
                         safeHeight: safeHeight,
+                        safeWidth: safeWidth,
                         temperature: temperature,
                         feelsTemperature: feelsTemperature,
                         minTemperature: minTemperature,
@@ -134,7 +147,7 @@ class _MainScreenState extends State<MainScreen> {
                       ),
 
                       /// Next 3 Days Weather
-                      NextDays(
+                      DayIcons(
                         safeWidth: safeWidth,
                         safeHeight: safeHeight,
                         dailyForecast: forecastDaily,

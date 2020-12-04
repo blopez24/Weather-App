@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/services/weather.dart';
 
-import 'upcoming_day.dart';
+import 'day_icon.dart';
 
-class NextDays extends StatelessWidget {
-  const NextDays({
+class DayIcons extends StatelessWidget {
+  const DayIcons({
     Key key,
     @required this.safeWidth,
     @required this.safeHeight,
@@ -23,7 +23,7 @@ class NextDays extends StatelessWidget {
       child: Row(
         children: [
           /// +1 Day
-          UpcomingDay(
+          DayIcon(
             safeWidth: safeWidth,
             safeHeight: safeHeight,
             temperature: dailyForecast[0].getTemperature(),
@@ -32,7 +32,7 @@ class NextDays extends StatelessWidget {
           ),
 
           /// +2 Day
-          UpcomingDay(
+          DayIcon(
             safeWidth: safeWidth,
             safeHeight: safeHeight,
             temperature: dailyForecast[1].getTemperature(),
@@ -41,7 +41,7 @@ class NextDays extends StatelessWidget {
           ),
 
           /// +3 Day
-          UpcomingDay(
+          DayIcon(
             safeWidth: safeWidth,
             safeHeight: safeHeight,
             temperature: dailyForecast[2].getTemperature(),
