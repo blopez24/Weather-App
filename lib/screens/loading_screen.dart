@@ -41,13 +41,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     NetworkHelper networkHelper = new NetworkHelper(
         "http://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=imperial");
+    var todayWeather = await networkHelper.getData();
 
-    var weatherData = await networkHelper.getData();
+    NetworkHelper networkHelper2 = new NetworkHelper(
+        "https://api.openweathermap.org/data/2.5/onecall?lat=$latitude&lon=$longitude&exclude=current,minutely,alerts&appid=$apiKey&units=imperial");
+    var forecastWeather = await networkHelper2.getData();
 
     /// Moves to the main screen, passing along the weather data.
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return MainScreen(
-        weatherInfo: weatherData,
+        weatherInfo: todayWeather,
+        upcomingInfo: forecastWeather,
       );
     }));
   }

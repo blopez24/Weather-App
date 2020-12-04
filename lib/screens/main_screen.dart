@@ -9,7 +9,8 @@ import 'package:weather_app/components/svg_icon.dart';
 
 class MainScreen extends StatefulWidget {
   final weatherInfo;
-  MainScreen({this.weatherInfo});
+  final upcomingInfo;
+  MainScreen({this.weatherInfo, this.upcomingInfo});
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -31,16 +32,21 @@ class _MainScreenState extends State<MainScreen> {
   /// Holds the sunrise and sunset times.
   List<DateTime> times;
 
+  /// Holds the upcoming hourly weather
+  List<Forecast> forecastHourly;
+
+  /// Holds the upcoming daily weather
+  List<Forecast> forecastDaily;
+
   @override
   void initState() {
     super.initState();
-    updateUI(widget.weatherInfo);
+    updateUI(widget.weatherInfo, widget.upcomingInfo);
   }
 
   /// Components are fed weather information parsed from the json data.
-  void updateUI(dynamic weatherData) {
+  void updateUI(dynamic weatherData, dynamic upcomingData) {
     var w = Weather(jsonWeatherData: weatherData);
-
     description = w.getDescription();
     iconID = w.getWeatherIconID();
     cityName = w.getCityName();
@@ -51,6 +57,10 @@ class _MainScreenState extends State<MainScreen> {
     maxTemperature = w.getMaxTemp();
 
     times = w.getSunsetAndSunrise();
+
+    w = Weather(jsonWeatherData: upcomingData);
+    forecastHourly = w.getForecastHourly();
+    forecastDaily = w.getForecastDaily();
   }
 
   @override
@@ -125,13 +135,7 @@ class _MainScreenState extends State<MainScreen> {
                       NextDays(
                         safeWidth: safeWidth,
                         safeHeight: safeHeight,
-                        dayOneTemp: 01,
-                        dayOneIconID: -1,
-                        dayTwoTemp: 02,
-                        dayTwoIconID: -1,
-                        dayThreeTemp: 03,
-                        dayThreeIconID: -1,
-                        times: [],
+                        dailyForecast: forecastDaily,
                       ),
                     ],
                   ),

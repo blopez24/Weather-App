@@ -1,3 +1,5 @@
+const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
 class Weather {
   /// Json weather data obtained from openweatherapi.
   final jsonWeatherData;
@@ -24,4 +26,49 @@ class Weather {
     var sunset = new DateTime.fromMillisecondsSinceEpoch(sunsetUTC * 1000);
     return [sunrise, sunset];
   }
+
+  List<Forecast> getForecastHourly() {
+    List<Forecast> hourly = new List();
+    var jsonHourly = this.jsonWeatherData['hourly'];
+    for (int i = 0; i < 6; i++) {
+      var hour = jsonHourly[i * 2]['dt'];
+      int temp = jsonHourly[i * 2]['temp'].toInt();
+      int icon = jsonHourly[i * 2]['weather'][0]['id'];
+      Forecast h = new Forecast(time: hour, temperature: temp, icon: icon);
+      hourly.add(h);
+    }
+    return hourly;
+  }
+
+  List<Forecast> getForecastDaily() {
+    List<Forecast> daily = new List();
+    var jsonDaily = this.jsonWeatherData['daily'];
+    for (int i = 1; i < 4; i++) {
+      var date = jsonDaily[i]['dt'];
+      date = new DateTime.fromMillisecondsSinceEpoch(date * 1000);
+      date = days[date.day];
+
+      int temp = jsonDaily[i]['temp']['day'].toInt();
+      int icon = jsonDaily[i]['weather'][0]['id'];
+      Forecast h = new Forecast(time: date, temperature: temp, icon: icon);
+      daily.add(h);
+    }
+    return daily;
+  }
+}
+
+class Forecast {
+  final time;
+  final temperature;
+  final icon;
+  Forecast({this.time, this.temperature, this.icon});
+
+  @override
+  String toString() {
+    return 'Time: $time\tTemperature: $temperature\tIcon: $icon\t';
+  }
+
+  getTime() => this.time;
+  getTemperature() => this.temperature;
+  getIcon() => this.icon;
 }

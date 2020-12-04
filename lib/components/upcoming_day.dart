@@ -9,13 +9,13 @@ class UpcomingDay extends StatelessWidget {
     @required this.safeHeight,
     @required this.temperature,
     @required this.iconID,
-    @required this.times,
+    @required this.date,
   }) : super(key: key);
 
   final double safeWidth, safeHeight;
   final int iconID;
   final int temperature;
-  final List<DateTime> times;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class UpcomingDay extends StatelessWidget {
               width: double.infinity,
               child: SvgIcon(
                 id: iconID,
-                times: times,
+                times: [],
               )),
 
           /// Date
@@ -56,7 +56,7 @@ class UpcomingDay extends StatelessWidget {
               padding: const EdgeInsets.all(5.0),
               child: FittedBox(
                 child: Text(
-                  '00/01',
+                  date,
                   style: kMainTextStyle,
                 ),
               ),
