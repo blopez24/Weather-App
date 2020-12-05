@@ -32,7 +32,7 @@ class DayIcon extends StatelessWidget {
               padding: const EdgeInsets.all(5.0),
               child: FittedBox(
                 child: Text(
-                  '$temperature°',
+                  ' $temperature°',
                   style: kMainTextStyle,
                 ),
               ),

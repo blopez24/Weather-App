@@ -7,6 +7,8 @@ import 'package:weather_app/components/temperature_card.dart';
 import 'package:weather_app/components/day_icons.dart';
 import 'package:weather_app/components/svg_icon.dart';
 
+import 'package:weather_app/components/hourly_graph.dart';
+
 class MainScreen extends StatefulWidget {
   final weatherInfo;
   final upcomingInfo;
@@ -79,7 +81,7 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 /// ROW 1: Weather Description
                 Container(
-                  height: safeHeight * 0.15,
+                  height: safeHeight * 0.125,
                   width: safeWidth,
                   child: Row(
                     children: [
@@ -93,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
 
                 /// ROW 2: Weather Icon
                 Container(
-                  height: safeHeight * 0.35,
+                  height: safeHeight * 0.375,
                   width: safeWidth,
                   child: SvgIcon(
                     id: iconID,
@@ -112,6 +114,13 @@ class _MainScreenState extends State<MainScreen> {
                   //   safeHeight: safeHeight,
                   //   safeWidth: safeWidth,
                   // ),
+                  child: Center(
+                    child: HourlyGraph(
+                      safeHeight: safeHeight,
+                      safeWidth: safeWidth,
+                      forecast: forecastHourly,
+                    ),
+                  ),
                 ),
 
                 /// ROW 4: City's Name
