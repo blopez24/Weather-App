@@ -25,8 +25,11 @@ class HourlyGraph extends StatelessWidget {
     return Container(
       height: safeHeight * 0.225,
       width: safeWidth,
-      child: LineChart(
-        weatherData(),
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: LineChart(
+          weatherData(),
+        ),
       ),
     );
   }
@@ -54,7 +57,6 @@ class HourlyGraph extends StatelessWidget {
           isStepLineChart: false,
         ),
       ],
-      // betweenBarsData: [], // Does not work, idk
       titlesData: FlTitlesData(
         show: true,
         leftTitles: SideTitles(
@@ -63,11 +65,7 @@ class HourlyGraph extends StatelessWidget {
             return '';
           },
           reservedSize: 0,
-          // getTextStyles: // Not need
           margin: 10,
-          // interval: // Don't know
-          // rotateAngle: // Don't know
-          // checkToShowTitle: // Don't know
         ),
         topTitles: SideTitles(
           showTitles: true,
@@ -95,9 +93,6 @@ class HourlyGraph extends StatelessWidget {
             letterSpacing: 1.0,
           ),
           margin: 1,
-          // interval: // Don't know
-          // rotateAngle: // Don't know
-          // checkToShowTitle: // Don't know
         ),
         rightTitles: SideTitles(
           showTitles: true,
@@ -105,11 +100,7 @@ class HourlyGraph extends StatelessWidget {
             return '';
           },
           reservedSize: 0,
-          // getTextStyles: // Not needed
           margin: 10,
-          // interval: // Don't know
-          // rotateAngle: // Don't know
-          // checkToShowTitle: // Don't know
         ),
         bottomTitles: SideTitles(
           showTitles: true,
@@ -142,8 +133,29 @@ class HourlyGraph extends StatelessWidget {
           // checkToShowTitle: // Don't know
         ),
       ),
-      extraLinesData: ExtraLinesData(),
-      lineTouchData: LineTouchData(),
+      // extraLinesData: , // Not needed
+      lineTouchData: LineTouchData(
+        enabled: true,
+        touchTooltipData: LineTouchTooltipData(
+          tooltipBgColor: Colors.white,
+          tooltipRoundedRadius: 45,
+          tooltipPadding: EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 8,
+          ),
+          // tooltipBottomMargin: 16, // Default value
+          // maxContentWidth: // Not needed
+          // getTooltipItems: // Not needed
+          fitInsideHorizontally: true,
+          fitInsideVertically: true,
+          // showOnTopOfTheChartBoxArea: false, // Default value
+        ),
+        // getTouchedSpotIndicator: [], // IDK
+        // touchSpotThreshold: // Default value
+        // handleBuiltInTouches: true, // Default value
+        fullHeightTouchLine: true,
+        // touchCallback: // IDK
+      ),
       showingTooltipIndicators: [],
       //
       gridData: FlGridData(),
