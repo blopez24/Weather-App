@@ -107,7 +107,7 @@ class _MainScreenState extends State<MainScreen> {
                 Container(
                   height: safeHeight * 0.225,
                   width: safeWidth,
-                  color: Colors.greenAccent,
+                  color: Colors.black,
 
                   /// TODO: Look into graphs, this currently looks to ugly.
                   // child: HourIcons(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+
 import 'package:weather_app/services/weather.dart';
 
 //https://pub.dev/packages/fl_chart
@@ -44,30 +45,103 @@ class HourlyGraph extends StatelessWidget {
             FlSpot(20, 53),
           ],
           colors: gradientColors,
-          // colorStops: null, // Not used
-          // gradientFrom: 0-1 // Not used
-          // gradientTo: 0-1 // Not used
           barWidth: 5.0,
           isCurved: true,
-          // curveSmoothness: 0.0 // Default value is perfect
-          // preventCurveOverShooting: false // Default value
-          // preventCurveOvershootingThreshold: 10.0, // Not used
-          // isStrokeCapRound: false, // Not used
-          // belowBarData: , // Not used
-          // aboveBarData: , // Not used
           dotData: FlDotData(
             show: false,
-            // checkToShowDot: null // Not used
-            // getDotPainter: null // Not used
           ),
-          // showingIndicators: [],// Not used
           // dashArray: [5, 1], // Maybe ?
           isStepLineChart: false,
-          // lineChartStepData: isStepLineChart must be true to used // Not used
         ),
       ],
-      betweenBarsData: [],
-      titlesData: FlTitlesData(),
+      // betweenBarsData: [], // Does not work, idk
+      titlesData: FlTitlesData(
+        show: true,
+        leftTitles: SideTitles(
+          showTitles: true,
+          getTitles: (value) {
+            return '';
+          },
+          reservedSize: 0,
+          // getTextStyles: // Not need
+          margin: 10,
+          // interval: // Don't know
+          // rotateAngle: // Don't know
+          // checkToShowTitle: // Don't know
+        ),
+        topTitles: SideTitles(
+          showTitles: true,
+          getTitles: (value) {
+            switch (value.toInt()) {
+              case 10:
+                return '50°';
+              case 12:
+                return '53°';
+              case 14:
+                return '53°';
+              case 16:
+                return '52°';
+              case 18:
+                return '52°';
+              case 20:
+                return '53°';
+            }
+            return '';
+          },
+          reservedSize: 20,
+          getTextStyles: (value) => const TextStyle(
+            color: Colors.white,
+            height: 1.0,
+            letterSpacing: 1.0,
+          ),
+          margin: 1,
+          // interval: // Don't know
+          // rotateAngle: // Don't know
+          // checkToShowTitle: // Don't know
+        ),
+        rightTitles: SideTitles(
+          showTitles: true,
+          getTitles: (value) {
+            return '';
+          },
+          reservedSize: 0,
+          // getTextStyles: // Not needed
+          margin: 10,
+          // interval: // Don't know
+          // rotateAngle: // Don't know
+          // checkToShowTitle: // Don't know
+        ),
+        bottomTitles: SideTitles(
+          showTitles: true,
+          getTitles: (value) {
+            switch (value.toInt()) {
+              case 10:
+                return '11:00';
+              case 12:
+                return '1:00';
+              case 14:
+                return '3:00';
+              case 16:
+                return '5:00';
+              case 18:
+                return '7:00';
+              case 20:
+                return '9:00';
+            }
+            return '';
+          },
+          reservedSize: 20,
+          getTextStyles: (value) => const TextStyle(
+            color: Colors.white,
+            height: 1.0,
+            letterSpacing: 1.0,
+          ),
+          margin: 1,
+          // interval: // Don't know
+          // rotateAngle: // Don't know
+          // checkToShowTitle: // Don't know
+        ),
+      ),
       extraLinesData: ExtraLinesData(),
       lineTouchData: LineTouchData(),
       showingTooltipIndicators: [],
@@ -81,7 +155,7 @@ class HourlyGraph extends StatelessWidget {
       minY: 48,
       maxY: 55,
       clipData: FlClipData.none(),
-      backgroundColor: Colors.greenAccent,
+      backgroundColor: Colors.black,
     );
   }
 

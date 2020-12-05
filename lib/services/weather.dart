@@ -38,8 +38,6 @@ class Weather {
       int icon = jsonHourly[i * 2]['weather'][0]['id'];
       Forecast h = new Forecast(time: hour, temperature: temp, icon: icon);
       hourly.add(h);
-      print(hour);
-      print(temp);
     }
     return hourly;
   }
