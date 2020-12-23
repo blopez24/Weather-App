@@ -23,10 +23,10 @@ class TemperatureInfo extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: safeHeight * 0.2 * 0.60,
+            height: safeHeight * 0.250 * 0.60,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(2.0),
+              padding: const EdgeInsets.all(5.0),
               child: FittedBox(
                 child: Text(
                   ' $temperature°',
@@ -37,10 +37,10 @@ class TemperatureInfo extends StatelessWidget {
             ),
           ),
           Container(
-            height: safeHeight * 0.2 * 0.20,
+            height: safeHeight * 0.250 * 0.20,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(2.0),
+              padding: const EdgeInsets.all(5.0),
               child: FittedBox(
                 child: Text(
                   '$maxTemperature° | $minTemperature°',
@@ -51,10 +51,10 @@ class TemperatureInfo extends StatelessWidget {
             ),
           ),
           Container(
-            height: safeHeight * 0.2 * 0.20,
+            height: safeHeight * 0.250 * 0.20,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(2.0),
+              padding: const EdgeInsets.all(5.0),
               child: FittedBox(
                 child: Text(
                   'feels like $feelsTemperature°',

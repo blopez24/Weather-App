@@ -26,10 +26,10 @@ class DayIcon extends StatelessWidget {
         children: [
           /// Temperature
           Container(
-            height: safeHeight * 0.2 * 0.25,
+            height: safeHeight * 0.250 * 0.25,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(10.0),
               child: FittedBox(
                 child: Text(
                   ' $temperature°',
@@ -41,7 +41,7 @@ class DayIcon extends StatelessWidget {
 
           /// Svg Icon
           Container(
-              height: safeHeight * 0.2 * 0.50,
+              height: safeHeight * 0.25 * 0.50,
               width: double.infinity,
               child: SvgIcon(
                 id: iconID,
@@ -50,10 +50,10 @@ class DayIcon extends StatelessWidget {
 
           /// Date
           Container(
-            height: safeHeight * 0.2 * 0.25,
+            height: safeHeight * 0.25 * 0.25,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(10.0),
               child: FittedBox(
                 child: Text(
                   date,
