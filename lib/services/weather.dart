@@ -45,7 +45,7 @@ class Weather {
   List<Forecast> getForecastDaily() {
     List<Forecast> daily = new List();
     var jsonDaily = this.jsonWeatherData['daily'];
-    for (int i = 1; i < 4; i++) {
+    for (int i = 1; i < 6; i++) {
       var date = jsonDaily[i]['dt'];
       date = new DateTime.fromMillisecondsSinceEpoch(date * 1000);
       date = days[date.weekday];

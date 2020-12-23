@@ -3,11 +3,9 @@ import 'package:weather_app/constants.dart';
 import 'package:weather_app/services/weather.dart';
 
 import 'package:weather_app/components/weather_description.dart';
-import 'package:weather_app/components/temperature_card.dart';
-import 'package:weather_app/components/day_icons.dart';
-import 'package:weather_app/components/svg_icon.dart';
-
 import 'package:weather_app/components/hourly_graph.dart';
+import 'package:weather_app/components/swipe_card.dart';
+import 'package:weather_app/components/svg_icon.dart';
 
 class MainScreen extends StatefulWidget {
   final weatherInfo;
@@ -95,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
 
                 /// ROW 2: Weather Icon
                 Container(
-                  height: safeHeight * 0.375,
+                  height: safeHeight * 0.30,
                   width: safeWidth,
                   child: SvgIcon(
                     id: iconID,
@@ -103,17 +101,19 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
 
-                /// ROW 3: Hourly Weather
+                /// ROW 3: Current Weather && Daily Weather
+                /// Swipe feature
                 Container(
-                  height: safeHeight * 0.225,
+                  height: safeHeight * 0.250,
                   width: safeWidth,
-                  color: Colors.black,
-                  child: Center(
-                    child: HourlyGraph(
-                      safeHeight: safeHeight,
-                      safeWidth: safeWidth,
-                      forecast: forecastHourly,
-                    ),
+                  child: SwipeCard(
+                    safeHeight: safeHeight,
+                    safeWidth: safeWidth,
+                    temperature: temperature,
+                    feelsTemperature: feelsTemperature,
+                    minTemperature: minTemperature,
+                    maxTemperature: maxTemperature,
+                    forecastDaily: forecastDaily,
                   ),
                 ),
 
@@ -133,31 +133,19 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
 
-                /// ROW 5: Current Weather / Daily Weather
+                /// ROW 5: Hourly Weather
                 Container(
-                  height: safeHeight * 0.20,
+                  height: safeHeight * 0.250,
                   width: safeWidth,
-                  child: Row(
-                    children: [
-                      /// Temperature (w/ feels like temperature)
-                      TemperatureInfo(
-                        safeHeight: safeHeight,
-                        safeWidth: safeWidth,
-                        temperature: temperature,
-                        feelsTemperature: feelsTemperature,
-                        minTemperature: minTemperature,
-                        maxTemperature: maxTemperature,
-                      ),
-
-                      /// Next 3 Days Weather
-                      DayIcons(
-                        safeWidth: safeWidth,
-                        safeHeight: safeHeight,
-                        dailyForecast: forecastDaily,
-                      ),
-                    ],
+                  color: Colors.black,
+                  child: Center(
+                    child: HourlyGraph(
+                      safeHeight: safeHeight,
+                      safeWidth: safeWidth,
+                      forecast: forecastHourly,
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),
