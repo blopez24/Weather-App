@@ -108,12 +108,6 @@ class _MainScreenState extends State<MainScreen> {
                   height: safeHeight * 0.225,
                   width: safeWidth,
                   color: Colors.black,
-
-                  /// TODO: Look into graphs, this currently looks to ugly.
-                  // child: HourIcons(
-                  //   safeHeight: safeHeight,
-                  //   safeWidth: safeWidth,
-                  // ),
                   child: Center(
                     child: HourlyGraph(
                       safeHeight: safeHeight,
