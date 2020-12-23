@@ -1,4 +1,4 @@
-const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const days = ['', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 class Weather {
   /// Json weather data obtained from openweatherapi.
@@ -32,6 +32,8 @@ class Weather {
     var jsonHourly = this.jsonWeatherData['hourly'];
     for (int i = 0; i < 6; i++) {
       var hour = jsonHourly[i * 2]['dt'];
+      hour = new DateTime.fromMillisecondsSinceEpoch(hour * 1000);
+      hour = (hour.hour % 12 == 0) ? '12:00' : '${hour.hour % 12}:00';
       int temp = jsonHourly[i * 2]['temp'].toInt();
       int icon = jsonHourly[i * 2]['weather'][0]['id'];
       Forecast h = new Forecast(time: hour, temperature: temp, icon: icon);
@@ -46,7 +48,7 @@ class Weather {
     for (int i = 1; i < 4; i++) {
       var date = jsonDaily[i]['dt'];
       date = new DateTime.fromMillisecondsSinceEpoch(date * 1000);
-      date = days[date.day];
+      date = days[date.weekday];
 
       int temp = jsonDaily[i]['temp']['day'].toInt();
       int icon = jsonDaily[i]['weather'][0]['id'];
@@ -69,6 +71,12 @@ class Forecast {
   }
 
   getTime() => this.time;
+  int getTimeInt() {
+    int index = time.indexOf(':');
+    int number = int.parse(time.substring(0, index));
+    return number;
+  }
+
   getTemperature() => this.temperature;
   getIcon() => this.icon;
 }
