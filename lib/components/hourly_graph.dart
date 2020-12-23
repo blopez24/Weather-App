@@ -3,10 +3,9 @@ import 'package:fl_chart/fl_chart.dart';
 
 import 'package:weather_app/services/weather.dart';
 
-//https://pub.dev/packages/fl_chart
 List<Color> gradientColors = [
-  const Color(0xff23b6e6),
-  const Color(0xff02d39a),
+  Colors.white,
+  Colors.white,
 ];
 
 class HourlyGraph extends StatelessWidget {
@@ -34,18 +33,55 @@ class HourlyGraph extends StatelessWidget {
     );
   }
 
+  double getMin() {
+    var min = forecast[0].getTemperature();
+    for (int i = 1; i < forecast.length; i++) {
+      if (min > forecast[i].getTemperature()) {
+        min = forecast[i].getTemperature();
+      }
+    }
+    return min.toDouble();
+  }
+
+  double getMax() {
+    var max = forecast[0].getTemperature();
+    for (int i = 1; i < forecast.length; i++) {
+      if (max < forecast[i].getTemperature()) {
+        max = forecast[i].getTemperature();
+      }
+    }
+    return max.toDouble();
+  }
+
   LineChartData weatherData() {
+    /// time as a string
+    String time1 = forecast[0].getTime();
+    String time2 = forecast[1].getTime();
+    String time3 = forecast[2].getTime();
+    String time4 = forecast[3].getTime();
+    String time5 = forecast[4].getTime();
+    String time6 = forecast[5].getTime();
+
+    /// temperatures as an int
+    int temp1 = forecast[0].getTemperature();
+    int temp2 = forecast[1].getTemperature();
+    int temp3 = forecast[2].getTemperature();
+    int temp4 = forecast[3].getTemperature();
+    int temp5 = forecast[4].getTemperature();
+    int temp6 = forecast[5].getTemperature();
+
     return LineChartData(
       lineBarsData: [
         LineChartBarData(
           show: true,
           spots: [
-            FlSpot(10, 50),
-            FlSpot(12, 53),
-            FlSpot(14, 53),
-            FlSpot(16, 52),
-            FlSpot(18, 52),
-            FlSpot(20, 53),
+            /// (x,y) = (placement, temperature)
+            FlSpot(1, temp1.toDouble()),
+            FlSpot(4, temp2.toDouble()),
+            FlSpot(7, temp3.toDouble()),
+            FlSpot(10, temp4.toDouble()),
+            FlSpot(13, temp5.toDouble()),
+            FlSpot(16, temp6.toDouble()),
           ],
           colors: gradientColors,
           barWidth: 5.0,
@@ -53,7 +89,6 @@ class HourlyGraph extends StatelessWidget {
           dotData: FlDotData(
             show: false,
           ),
-          // dashArray: [5, 1], // Maybe ?
           isStepLineChart: false,
         ),
       ],
@@ -71,18 +106,18 @@ class HourlyGraph extends StatelessWidget {
           showTitles: true,
           getTitles: (value) {
             switch (value.toInt()) {
+              case 1:
+                return '+0:00';
+              case 4:
+                return '+2:00';
+              case 7:
+                return '+4:00';
               case 10:
-                return '50°';
-              case 12:
-                return '53°';
-              case 14:
-                return '53°';
+                return '+6:00';
+              case 13:
+                return '+8:00';
               case 16:
-                return '52°';
-              case 18:
-                return '52°';
-              case 20:
-                return '53°';
+                return '+10:00';
             }
             return '';
           },
@@ -106,18 +141,18 @@ class HourlyGraph extends StatelessWidget {
           showTitles: true,
           getTitles: (value) {
             switch (value.toInt()) {
+              case 1:
+                return time1;
+              case 4:
+                return time2;
+              case 7:
+                return time3;
               case 10:
-                return '11:00';
-              case 12:
-                return '1:00';
-              case 14:
-                return '3:00';
+                return time4;
+              case 13:
+                return time5;
               case 16:
-                return '5:00';
-              case 18:
-                return '7:00';
-              case 20:
-                return '9:00';
+                return time6;
             }
             return '';
           },
@@ -127,148 +162,37 @@ class HourlyGraph extends StatelessWidget {
             height: 1.0,
             letterSpacing: 1.0,
           ),
-          margin: 1,
-          // interval: // Don't know
-          // rotateAngle: // Don't know
-          // checkToShowTitle: // Don't know
         ),
       ),
-      // extraLinesData: , // Not needed
       lineTouchData: LineTouchData(
         enabled: true,
         touchTooltipData: LineTouchTooltipData(
-          tooltipBgColor: Colors.white,
+          tooltipBgColor: Colors.black,
           tooltipRoundedRadius: 45,
           tooltipPadding: EdgeInsets.symmetric(
             horizontal: 8,
             vertical: 8,
           ),
-          // tooltipBottomMargin: 16, // Default value
-          // maxContentWidth: // Not needed
-          // getTooltipItems: // Not needed
           fitInsideHorizontally: true,
           fitInsideVertically: true,
-          // showOnTopOfTheChartBoxArea: false, // Default value
         ),
-        // getTouchedSpotIndicator: [], // IDK
-        // touchSpotThreshold: // Default value
-        // handleBuiltInTouches: true, // Default value
         fullHeightTouchLine: true,
-        // touchCallback: // IDK
       ),
-      showingTooltipIndicators: [],
-      //
-      gridData: FlGridData(),
-      borderData: FlBorderData(),
-      axisTitleData: FlAxisTitleData(),
-      rangeAnnotations: RangeAnnotations(),
-      minX: 9,
-      maxX: 21,
-      minY: 48,
-      maxY: 55,
-      clipData: FlClipData.none(),
-      backgroundColor: Colors.black,
-    );
-  }
-
-  LineChartData mainData() {
-    return LineChartData(
       gridData: FlGridData(
-        show: true,
+        // show: false,
         drawVerticalLine: true,
-        getDrawingHorizontalLine: (value) {
-          return FlLine(
-            color: const Color(0xff37434d),
-            strokeWidth: 1,
-          );
-        },
-        getDrawingVerticalLine: (value) {
-          return FlLine(
-            color: const Color(0xff37434d),
-            strokeWidth: 1,
-          );
-        },
-      ),
-      titlesData: FlTitlesData(
-        show: true,
-        bottomTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 22,
-          getTextStyles: (value) => const TextStyle(
-            color: Color(0xff68737d),
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 2:
-                return 'MAR';
-              case 5:
-                return 'JUN';
-              case 8:
-                return 'SEP';
-            }
-            return '';
-          },
-          margin: 8,
-        ),
-        rightTitles: SideTitles(
-          showTitles: true,
-          getTextStyles: (value) => const TextStyle(
-            color: Color(0xff67727d),
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 1:
-                return '10k';
-              case 3:
-                return '30k';
-              case 5:
-                return '50k';
-            }
-            return '';
-          },
-          reservedSize: 28,
-          margin: 12,
-        ),
       ),
       borderData: FlBorderData(
-        show: true,
         border: Border.all(
-          color: const Color(0xff37434d),
+          color: Colors.white,
           width: 1,
         ),
       ),
       minX: 0,
-      maxX: 11,
-      minY: 0,
-      maxY: 6,
-      lineBarsData: [
-        LineChartBarData(
-          spots: [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
-          ],
-          isCurved: true,
-          colors: gradientColors,
-          barWidth: 5,
-          isStrokeCapRound: true,
-          dotData: FlDotData(
-            show: false,
-          ),
-          belowBarData: BarAreaData(
-            show: true,
-            colors: gradientColors.map((color) => color.withOpacity(0.3)).toList(),
-          ),
-        ),
-      ],
+      maxX: 17,
+      minY: getMin() - 1,
+      maxY: getMax() + 1,
+      backgroundColor: Colors.black,
     );
   }
 }

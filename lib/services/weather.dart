@@ -71,6 +71,12 @@ class Forecast {
   }
 
   getTime() => this.time;
+  int getTimeInt() {
+    int index = time.indexOf(':');
+    int number = int.parse(time.substring(0, index));
+    return number;
+  }
+
   getTemperature() => this.temperature;
   getIcon() => this.icon;
 }
