@@ -47,6 +47,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
         "https://api.openweathermap.org/data/2.5/onecall?lat=$latitude&lon=$longitude&exclude=current,minutely,alerts&appid=$apiKey&units=imperial");
     var forecastWeather = await networkHelper2.getData();
 
+    Navigator.pop(context);
+
     /// Moves to the main screen, passing along the weather data.
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return MainScreen(
