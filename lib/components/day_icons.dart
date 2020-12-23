@@ -19,7 +19,7 @@ class DayIcons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: double.infinity,
-      width: safeWidth * 0.6,
+      width: safeWidth,
       child: Row(
         children: [
           /// +1 Day
@@ -47,6 +47,24 @@ class DayIcons extends StatelessWidget {
             temperature: dailyForecast[2].getTemperature(),
             iconID: dailyForecast[2].getIcon(),
             date: dailyForecast[2].getTime(),
+          ),
+
+          /// +4 Day
+          DayIcon(
+            safeWidth: safeWidth,
+            safeHeight: safeHeight,
+            temperature: dailyForecast[3].getTemperature(),
+            iconID: dailyForecast[3].getIcon(),
+            date: dailyForecast[3].getTime(),
+          ),
+
+          /// +5 Day
+          DayIcon(
+            safeWidth: safeWidth,
+            safeHeight: safeHeight,
+            temperature: dailyForecast[4].getTemperature(),
+            iconID: dailyForecast[4].getIcon(),
+            date: dailyForecast[4].getTime(),
           ),
         ],
       ),
