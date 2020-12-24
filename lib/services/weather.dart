@@ -11,13 +11,13 @@ class Weather {
 
   getWeatherIconID() => this.jsonWeatherData['weather'][0]['id'];
 
-  getTemp() => this.jsonWeatherData['main']['temp'].toInt();
+  getTemp() => this.jsonWeatherData['main']['temp'].round();
 
-  getFeelsTemp() => this.jsonWeatherData['main']['feels_like'].toInt();
+  getFeelsTemp() => this.jsonWeatherData['main']['feels_like'].round();
 
-  getMinTemp() => this.jsonWeatherData['main']['temp_min'].toInt();
+  getMinTemp() => this.jsonWeatherData['main']['temp_min'].round();
 
-  getMaxTemp() => this.jsonWeatherData['main']['temp_max'].toInt();
+  getMaxTemp() => this.jsonWeatherData['main']['temp_max'].round();
 
   List<DateTime> getSunsetAndSunrise() {
     var sunriseUTC = jsonWeatherData['sys']['sunrise'];
@@ -30,12 +30,12 @@ class Weather {
   List<Forecast> getForecastHourly() {
     List<Forecast> hourly = new List();
     var jsonHourly = this.jsonWeatherData['hourly'];
-    for (int i = 0; i < 6; i++) {
-      var hour = jsonHourly[i * 2]['dt'];
+    for (int i = 0; i < 12; i++) {
+      var hour = jsonHourly[i]['dt'];
       hour = new DateTime.fromMillisecondsSinceEpoch(hour * 1000);
       hour = (hour.hour % 12 == 0) ? '12:00' : '${hour.hour % 12}:00';
-      int temp = jsonHourly[i * 2]['temp'].toInt();
-      int icon = jsonHourly[i * 2]['weather'][0]['id'];
+      int temp = jsonHourly[i]['temp'].round();
+      int icon = jsonHourly[i]['weather'][0]['id'];
       Forecast h = new Forecast(time: hour, temperature: temp, icon: icon);
       hourly.add(h);
     }
@@ -50,7 +50,7 @@ class Weather {
       date = new DateTime.fromMillisecondsSinceEpoch(date * 1000);
       date = days[date.weekday];
 
-      int temp = jsonDaily[i]['temp']['day'].toInt();
+      int temp = jsonDaily[i]['temp']['day'].round();
       int icon = jsonDaily[i]['weather'][0]['id'];
       Forecast h = new Forecast(time: date, temperature: temp, icon: icon);
       daily.add(h);

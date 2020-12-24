@@ -35,7 +35,7 @@ class HourlyGraph extends StatelessWidget {
 
   double getMin() {
     var min = forecast[0].getTemperature();
-    for (int i = 1; i < forecast.length; i++) {
+    for (int i = 1; i < forecast.length - 1; i++) {
       if (min > forecast[i].getTemperature()) {
         min = forecast[i].getTemperature();
       }
@@ -45,7 +45,7 @@ class HourlyGraph extends StatelessWidget {
 
   double getMax() {
     var max = forecast[0].getTemperature();
-    for (int i = 1; i < forecast.length; i++) {
+    for (int i = 1; i < forecast.length - 1; i++) {
       if (max < forecast[i].getTemperature()) {
         max = forecast[i].getTemperature();
       }
@@ -56,11 +56,11 @@ class HourlyGraph extends StatelessWidget {
   LineChartData weatherData() {
     /// time as a string
     String time1 = forecast[0].getTime();
-    String time2 = forecast[1].getTime();
     String time3 = forecast[2].getTime();
-    String time4 = forecast[3].getTime();
     String time5 = forecast[4].getTime();
-    String time6 = forecast[5].getTime();
+    String time7 = forecast[6].getTime();
+    String time9 = forecast[8].getTime();
+    String time11 = forecast[10].getTime();
 
     /// temperatures as an int
     int temp1 = forecast[0].getTemperature();
@@ -69,6 +69,11 @@ class HourlyGraph extends StatelessWidget {
     int temp4 = forecast[3].getTemperature();
     int temp5 = forecast[4].getTemperature();
     int temp6 = forecast[5].getTemperature();
+    int temp7 = forecast[6].getTemperature();
+    int temp8 = forecast[7].getTemperature();
+    int temp9 = forecast[8].getTemperature();
+    int temp10 = forecast[9].getTemperature();
+    int temp11 = forecast[10].getTemperature();
 
     return LineChartData(
       lineBarsData: [
@@ -77,11 +82,16 @@ class HourlyGraph extends StatelessWidget {
           spots: [
             /// (x,y) = (placement, temperature)
             FlSpot(1, temp1.toDouble()),
-            FlSpot(4, temp2.toDouble()),
-            FlSpot(7, temp3.toDouble()),
-            FlSpot(10, temp4.toDouble()),
-            FlSpot(13, temp5.toDouble()),
-            FlSpot(16, temp6.toDouble()),
+            FlSpot(2, temp2.toDouble()),
+            FlSpot(3, temp3.toDouble()),
+            FlSpot(4, temp4.toDouble()),
+            FlSpot(5, temp5.toDouble()),
+            FlSpot(6, temp6.toDouble()),
+            FlSpot(7, temp7.toDouble()),
+            FlSpot(8, temp8.toDouble()),
+            FlSpot(9, temp9.toDouble()),
+            FlSpot(10, temp10.toDouble()),
+            FlSpot(11, temp11.toDouble()),
           ],
           colors: gradientColors,
           barWidth: 5.0,
@@ -108,15 +118,15 @@ class HourlyGraph extends StatelessWidget {
             switch (value.toInt()) {
               case 1:
                 return '+0:00';
-              case 4:
+              case 3:
                 return '+2:00';
-              case 7:
+              case 5:
                 return '+4:00';
-              case 10:
+              case 7:
                 return '+6:00';
-              case 13:
+              case 9:
                 return '+8:00';
-              case 16:
+              case 11:
                 return '+10:00';
             }
             return '';
@@ -143,16 +153,16 @@ class HourlyGraph extends StatelessWidget {
             switch (value.toInt()) {
               case 1:
                 return time1;
-              case 4:
-                return time2;
-              case 7:
+              case 3:
                 return time3;
-              case 10:
-                return time4;
-              case 13:
+              case 5:
                 return time5;
-              case 16:
-                return time6;
+              case 7:
+                return time7;
+              case 9:
+                return time9;
+              case 11:
+                return time11;
             }
             return '';
           },
@@ -179,8 +189,8 @@ class HourlyGraph extends StatelessWidget {
         fullHeightTouchLine: true,
       ),
       gridData: FlGridData(
-        // show: false,
         drawVerticalLine: true,
+        drawHorizontalLine: true,
       ),
       borderData: FlBorderData(
         border: Border.all(
@@ -189,7 +199,7 @@ class HourlyGraph extends StatelessWidget {
         ),
       ),
       minX: 0,
-      maxX: 17,
+      maxX: 12,
       minY: getMin() - 1,
       maxY: getMax() + 1,
       backgroundColor: Colors.black,
