@@ -41,14 +41,16 @@ class WeatherDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: double.infinity,
-      width: safeWidth * 0.9,
+      width: safeWidth * 0.8,
       child: Padding(
         padding: const EdgeInsets.all(2.0),
         child: FittedBox(
           alignment: Alignment.centerLeft,
           child: Text(
             descriptionFormat(description),
-            style: kMainTextStyle,
+            style: kMainTextStyle.copyWith(
+              color: Theme.of(context).textTheme.bodyText1.color,
+            ),
           ),
         ),
       ),

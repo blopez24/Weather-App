@@ -7,13 +7,11 @@ const kLightBackground = Colors.white;
 const kLightAccent = Colors.black;
 
 const kMainTextStyle = TextStyle(
-  color: Colors.white,
   height: 1.0,
   letterSpacing: 1.0,
 );
 
-const kGreyTextStyle = TextStyle(
-  color: Colors.grey,
-  height: 1.0,
-  letterSpacing: 1.0,
+const kSettingTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  letterSpacing: 1.5,
 );

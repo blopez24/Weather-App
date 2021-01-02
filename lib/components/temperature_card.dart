@@ -30,7 +30,9 @@ class TemperatureInfo extends StatelessWidget {
               child: FittedBox(
                 child: Text(
                   ' $temperature°',
-                  style: kMainTextStyle,
+                  style: kMainTextStyle.copyWith(
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                  ),
                 ),
                 alignment: Alignment.center,
               ),
@@ -44,7 +46,9 @@ class TemperatureInfo extends StatelessWidget {
               child: FittedBox(
                 child: Text(
                   '$maxTemperature° | $minTemperature°',
-                  style: kMainTextStyle,
+                  style: kMainTextStyle.copyWith(
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                  ),
                 ),
                 alignment: Alignment.center,
               ),
@@ -58,7 +62,9 @@ class TemperatureInfo extends StatelessWidget {
               child: FittedBox(
                 child: Text(
                   'feels like $feelsTemperature°',
-                  style: kMainTextStyle,
+                  style: kMainTextStyle.copyWith(
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                  ),
                 ),
               ),
             ),

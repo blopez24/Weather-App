@@ -3,10 +3,8 @@ import 'package:fl_chart/fl_chart.dart';
 
 import 'package:weather_app/services/weather.dart';
 
-List<Color> gradientColors = [
-  Colors.white,
-  Colors.white,
-];
+Color mainColor;
+Color secondaryColor;
 
 class HourlyGraph extends StatelessWidget {
   const HourlyGraph({
@@ -21,6 +19,9 @@ class HourlyGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    mainColor = Theme.of(context).primaryColor;
+    secondaryColor = Theme.of(context).textTheme.bodyText1.color;
+
     return Container(
       height: safeHeight * 0.225,
       width: safeWidth,
@@ -93,7 +94,7 @@ class HourlyGraph extends StatelessWidget {
             FlSpot(10, temp10.toDouble()),
             FlSpot(11, temp11.toDouble()),
           ],
-          colors: gradientColors,
+          colors: [secondaryColor],
           barWidth: 5.0,
           isCurved: true,
           dotData: FlDotData(
@@ -132,8 +133,8 @@ class HourlyGraph extends StatelessWidget {
             return '';
           },
           reservedSize: 20,
-          getTextStyles: (value) => const TextStyle(
-            color: Colors.white,
+          getTextStyles: (value) => TextStyle(
+            color: secondaryColor,
             height: 1.0,
             letterSpacing: 1.0,
           ),
@@ -167,8 +168,8 @@ class HourlyGraph extends StatelessWidget {
             return '';
           },
           reservedSize: 20,
-          getTextStyles: (value) => const TextStyle(
-            color: Colors.white,
+          getTextStyles: (value) => TextStyle(
+            color: secondaryColor,
             height: 1.0,
             letterSpacing: 1.0,
           ),
@@ -177,7 +178,7 @@ class HourlyGraph extends StatelessWidget {
       lineTouchData: LineTouchData(
         enabled: true,
         touchTooltipData: LineTouchTooltipData(
-          tooltipBgColor: Colors.black,
+          tooltipBgColor: mainColor,
           tooltipRoundedRadius: 45,
           tooltipPadding: EdgeInsets.symmetric(
             horizontal: 8,
@@ -191,10 +192,22 @@ class HourlyGraph extends StatelessWidget {
       gridData: FlGridData(
         drawVerticalLine: true,
         drawHorizontalLine: true,
+        getDrawingVerticalLine: (double value) {
+          return FlLine(
+            color: secondaryColor,
+            strokeWidth: 0.5,
+          );
+        },
+        getDrawingHorizontalLine: (double value) {
+          return FlLine(
+            color: secondaryColor,
+            strokeWidth: 0.5,
+          );
+        },
       ),
       borderData: FlBorderData(
         border: Border.all(
-          color: Colors.white,
+          color: secondaryColor,
           width: 1,
         ),
       ),
@@ -202,7 +215,7 @@ class HourlyGraph extends StatelessWidget {
       maxX: 12,
       minY: getMin() - 1,
       maxY: getMax() + 1,
-      backgroundColor: Colors.black,
+      backgroundColor: mainColor,
     );
   }
 }

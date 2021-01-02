@@ -61,10 +61,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     getLocation();
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Center(
         child: SpinKitWave(
-          color: Colors.white,
+          color: Theme.of(context).accentColor,
           size: 100.0,
         ),
       ),

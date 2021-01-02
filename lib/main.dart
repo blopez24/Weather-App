@@ -11,6 +11,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        primaryColor: Colors.pink,
+        textTheme: TextTheme(
+          bodyText1: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        accentColor: Colors.white,
         fontFamily: 'Poppins',
       ),
       home: LoadingScreen(),

@@ -97,7 +97,7 @@ class SvgIcon extends StatelessWidget {
       child: FittedBox(
         child: SvgPicture.asset(
           assetName,
-          color: Colors.white,
+          color: Theme.of(context).accentColor,
         ),
         fit: BoxFit.contain,
       ),

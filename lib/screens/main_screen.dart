@@ -3,6 +3,7 @@ import 'package:weather_app/constants.dart';
 import 'package:weather_app/services/weather.dart';
 
 import 'package:weather_app/components/weather_description.dart';
+import 'package:weather_app/components/menu_card.dart';
 import 'package:weather_app/components/hourly_graph.dart';
 import 'package:weather_app/components/swipe_card.dart';
 import 'package:weather_app/components/svg_icon.dart';
@@ -70,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
     double safeHeight = MediaQuery.of(context).size.height - padding.top - padding.bottom - 20;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Container(
         child: SafeArea(
           child: Padding(
@@ -86,6 +87,10 @@ class _MainScreenState extends State<MainScreen> {
                       WeatherDescription(
                         safeWidth: safeWidth,
                         description: description,
+                      ),
+                      MenuButtonCard(
+                        safeHeight: safeHeight,
+                        safeWidth: safeWidth,
                       ),
                     ],
                   ),
@@ -127,7 +132,9 @@ class _MainScreenState extends State<MainScreen> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         '$cityName',
-                        style: kMainTextStyle,
+                        style: kMainTextStyle.copyWith(
+                          color: Theme.of(context).textTheme.bodyText1.color,
+                        ),
                       ),
                     ),
                   ),
@@ -137,7 +144,7 @@ class _MainScreenState extends State<MainScreen> {
                 Container(
                   height: safeHeight * 0.250,
                   width: safeWidth,
-                  color: Colors.black,
+                  color: Theme.of(context).primaryColor,
                   child: Center(
                     child: HourlyGraph(
                       safeHeight: safeHeight,

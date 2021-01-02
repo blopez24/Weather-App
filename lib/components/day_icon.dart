@@ -33,7 +33,9 @@ class DayIcon extends StatelessWidget {
               child: FittedBox(
                 child: Text(
                   ' $temperature°',
-                  style: kMainTextStyle,
+                  style: kMainTextStyle.copyWith(
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                  ),
                 ),
               ),
             ),
@@ -57,7 +59,9 @@ class DayIcon extends StatelessWidget {
               child: FittedBox(
                 child: Text(
                   date,
-                  style: kMainTextStyle,
+                  style: kMainTextStyle.copyWith(
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                  ),
                 ),
               ),
             ),
